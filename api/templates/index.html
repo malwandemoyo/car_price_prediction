@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display&display=swap" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="index.css"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <title>Car Price Prediction</title>
+</head>
+<body>
+
+    <div id="big_container">
+      <div id="smaller_container">
+        <form action="/predict" method="POST">
+        <div class="poison-ngife">
+          <div class="radio-text">
+            <h1>Transmission:</h1>
+            <label for="transmission">
+              <input type="radio" id="transmission-type" name="transmission" value="Automatic"><h2>Automatic</h2>
+            </label>
+            <label for="transmission">
+              <input type="radio" id="transmission-type" name="transmission" value="Manual"><h2>Manual</h2>
+            </label>
+          </div>
+          <div class="radio-text">
+            <h1>Fuel Type:</h1>
+            <label for="fuel-type">
+              <input type="radio" id="fuel-type" name="fuel-type" value="Petrol"><h2>Petrol</h2>
+            </label>
+            <label for="fuel-type">
+              <input type="radio" id="fuel-type" name="fuel-type" value="Diesel"><h2>Diesel</h2>
+            </label>
+          </div>
+    
+          <div class="radio-text">
+            <h1>Previous Owners:</h1>
+            <label for="previous-owners">
+              <input type="radio" id="previous-owners" name="previous-owners" value="1"><h2>1</h2>
+            </label>
+            <label for="previous-owners">
+              <input type="radio" id="previous-owners" name="previous-owners" value="2"><h2>2</h2>
+            </label>
+            <label for="previous-owners">
+              <input type="radio" id="previous-owners" name="previous-owners" value="3"><h2>3</h2>
+            </label>
+            <label for="previous-owners">
+              <input type="radio" id="previous-owners" name="previous-owners" value="more"><h2>more</h2>
+            </label>
+          </div>
+        </div>
+        
+        <div class="poison-ngife">
+          <div class="text-input">
+            <h1>Mileage (km):</h1>
+            <input type="number" name="mileage" id="mileage" min="0" max="1000000" step="1000" onkeypress="return isNumeric(event)">
+          </div>
+    
+          <div class="text-input">
+            <h1>Year:</h1>
+            <input type="datetime" name="year" id="year" min="2005" max="2023" step="1" onkeypress="return isNumeric(event)">
+          </div>
+        </div>
+
+        <div class="poison-ngife">
+          <div class="bhathanz">
+            <button type="submit">Predict Price</button>
+            <div>
+              <input type="reset"/>
+            </div>
+          </div>
+        </div>
+      
+      </form>
+
+      <div class="poison-ngife">
+
+        <div class="price-output">
+          <h1>Price:</h1>
+        </div>
+
+      </div>
+   
+      </div>
+    </div>
+
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  
+</body>
+</html>
