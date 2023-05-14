@@ -15,41 +15,37 @@
 
     <div id="big_container">
       <div id="smaller_container">
-        <form action="/predict" method="POST">
+        <form action="/predict" method="post">
         <div class="poison-ngife">
-          <div class="radio-text">
+          <div class="mhofu">
             <h1>Transmission:</h1>
-            <label for="transmission">
-              <input type="radio" id="transmission-type" name="transmission" value="Automatic"><h2>Automatic</h2>
-            </label>
-            <label for="transmission">
-              <input type="radio" id="transmission-type" name="transmission" value="Manual"><h2>Manual</h2>
-            </label>
+            <select name="transmission">
+              <option value="" {% if not transmission %} selected {% endif %}>Select Transmission</option>
+              <option value="Automatic" {% if transmission == 'Automatic' %} selected {% endif %}>Automatic</option>
+              <option value="Manual" {% if transmission == 'Manual' %} selected {% endif %}>Manual</option>
+            </select>
           </div>
-          <div class="radio-text">
-            <h1>Fuel Type:</h1>
-            <label for="fuel-type">
-              <input type="radio" id="fuel-type" name="fuel-type" value="Petrol"><h2>Petrol</h2>
-            </label>
-            <label for="fuel-type">
-              <input type="radio" id="fuel-type" name="fuel-type" value="Diesel"><h2>Diesel</h2>
-            </label>
+          
+          <div>
+            <h1>Fuel Type</h1>
+            <select name="fuel-type">
+              <option value="" {% if not fuel_type %} selected {% endif %}>Any</option>
+              <option value="Petrol" {% if fuel_type == "Petrol" %} selected {% endif %}>Petrol</option>
+              <option value="Diesel" {% if fuel_type == "Diesel" %} selected {% endif %}>Diesel</option>
+            </select>
           </div>
+
+
     
           <div class="radio-text">
-            <h1>Previous Owners:</h1>
-            <label for="previous-owners">
-              <input type="radio" id="previous-owners" name="previous-owners" value="1"><h2>1</h2>
-            </label>
-            <label for="previous-owners">
-              <input type="radio" id="previous-owners" name="previous-owners" value="2"><h2>2</h2>
-            </label>
-            <label for="previous-owners">
-              <input type="radio" id="previous-owners" name="previous-owners" value="3"><h2>3</h2>
-            </label>
-            <label for="previous-owners">
-              <input type="radio" id="previous-owners" name="previous-owners" value="more"><h2>more</h2>
-            </label>
+            <label for="previous-owners"><h2>Previous Owners:</h2></label>
+            <select name="previous-owners">
+              <option value="" {% if previous_owners is none %} selected {% endif %}>--Select--</option>
+              <option value="1" {% if previous_owners == "1" %} selected {% endif %}>1</option>
+              <option value="2" {% if previous_owners == "2" %} selected {% endif %}>2</option>
+              <option value="3" {% if previous_owners == "3" %} selected {% endif %}>3</option>
+              <option value="more" {% if previous_owners == "more" %} selected {% endif %}>More</option>
+            </select>
           </div>
         </div>
         
@@ -73,14 +69,13 @@
             </div>
           </div>
         </div>
-      </form>
 
-      <div class="poison-ngife">
-        <div class="price-output">
-          <h1>Price:</h1>
+        <div class="poison-ngife">
+          <div class="price-output">
+            <h1 name="price">Price:</h1>
+          </div>
         </div>
-      </div>
-   
+      </form>  
       </div>
     </div>
 

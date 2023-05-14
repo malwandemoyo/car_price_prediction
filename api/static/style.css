@@ -22,13 +22,16 @@ body{
 
 	width: 45em;
 	height: 40em;
+
+	/* background-color: pink; */
 }
 
-.radio-text{
+
+
+.mhofu{
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
+	background-color: pink;
 }
 
 label {
@@ -38,6 +41,7 @@ label {
 
 h1{
 	font-family: 'Playfair Display', serif;
+	font-size: 18px;
 }
 
 h2{
@@ -47,7 +51,7 @@ h2{
 
 h1, h2{
 	color:#121212;
-	line-height: 1.2;
+	line-height: 1;
 
 }
 

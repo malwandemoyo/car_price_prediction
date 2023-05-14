@@ -1,62 +1,46 @@
 import numpy as np
 from model import predict_price
 from flask import Flask, request, jsonify, render_template, json
-# import pickle
+
 
 app = Flask(__name__)
-# model = pickle.load(open('model.pkl', 'rb'))
+
+# transmission
+# fuel_type
+# previous_owners
+# year
+# car_price
+
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template('index.html')
+        return render_template("index.html",)
 
-@app.route('/predict',methods=['POST', 'GET'])
+@app.route('/predict',methods=['POST'])
 def predict():
-   
-    car_trans = ['Manual', 'Automatic'] 
-    car_fuel_type = ['Diesel', 'Petrol']
-    previous_owners = ['1', '2', '3', 'more']
-    
-    my_data = ['mileage', 'fuel-type', 'previous-owners', 'transmission', 'year']
-    user_input = []
-    
-    for data in my_data:
-        user_input.append(request.form.get(data))
-
-    print(user_input)
-
-    
-    
-    return 'Success'
-
-    
-    # for dta in mydata:
-    #     print(type(dta))
         
-    # data2 = json.loads(request.form)
-    # print(data2)
-    # print(f'Thiis the output: {request}')
+    user_input = {
+        "transmission": request.form.get('transmission'),
+        "fuel_type": request.form.get('fuel-type'),
+        "previous_owners": int(request.form.get('previous-owners')),
+        "year": int(request.form.get('year')),
+        "mileage": int(request.form.get('mileage')),
+        }
+        
+   
+    car_price = predict_price(user_input['transmission'], user_input['fuel_type'], user_input['previous_owners'], user_input['year'], user_input['mileage'])
+    
+    print(car_price)
+    print(user_input)
+    
 
-
-
-    # print(request)   
-
-#     int_features = [int(x) for x in request.form.values()]
-#     final_features = [np.array(int_features)]
-#     prediction = model.predict(final_features)
-
-#     output = round(prediction[0], 2)
-
-#     return render_template('index.html', prediction_text='Sales should be $ {}'.format(output))
-
-# @app.route('/results',methods=['POST'])
-# def results():
-
-#     data = request.get_json(force=True)
-#     prediction = model.predict([np.array(list(data.values()))])
-
-#     output = prediction[0]
-#     return jsonify(output)
+    return render_template("index.html", 
+                            transmission=user_input['transmission'],
+                            fuel_type=user_input['fuel_type'],
+                            previous_owners=user_input['previous_owners'],
+                            year=2020,
+                            mileage=user_input['mileage'],
+                            price=car_price)
 
 if __name__ == "__main__":
     app.run(debug=True)
