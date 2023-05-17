@@ -12,89 +12,96 @@
   <title>Car Price Prediction</title>
 </head>
 <body>
-
+  <div class="container">
     <div id="big_container">
       <div id="smaller_container">
         <form action="/predict" method="post">
-        <div class="poison-ngife">
-          <div class="mhofu">
-            <h1>Transmission:</h1>
-            <select name="transmission">
-              <option value="" {% if not transmission %} selected {% endif %}>Select Transmission</option>
-              <option value="Automatic" {% if transmission == 'Automatic' %} selected {% endif %}>Automatic</option>
-              <option value="Manual" {% if transmission == 'Manual' %} selected {% endif %}>Manual</option>
-            </select>
-          </div>
+          <div id="big-mhofu">
+            <div id="dropdown-div">
+              <div class="poison-ngife">
+                <div class="mhofu">
+                  <h1>Transmission:</h1>
+                  <select name="transmission">
+                    <option value="" {% if not transmission %} selected {% endif %}>Select Transmission</option>
+                    <option value="Automatic" {% if transmission == 'Automatic' %} selected {% endif %}>Automatic</option>
+                    <option value="Manual" {% if transmission == 'Manual' %} selected {% endif %}>Manual</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <h1>Fuel Type</h1>
+                  <select name="fuel-type">
+                    <option value="" {% if not fuel_type %} selected {% endif %}>Any</option>
+                    <option value="Petrol" {% if fuel_type == "Petrol" %} selected {% endif %}>Petrol</option>
+                    <option value="Diesel" {% if fuel_type == "Diesel" %} selected {% endif %}>Diesel</option>
+                  </select>
+                </div>
+      
+                <div>
+                  <select name="car_brand">
+                    <option value="">Select a car</option>
+                    <option value="1.1">Toyota</option>
+                    <option value="1.2">Isuzu</option>
+                    <option value="0.92">Honda</option>
+                    <option value="0.95">Hyundai</option>
+                    <option value="0.95">Mazda</option>
+                    <option value="1.66">BMW</option>
+                    <option value="2.0">Audi</option>
+                    <option value="1.9">Mercedez-Benz</option>
+                    <option value="1.8">Ford</option>
+                    <option value="1.4">Datsun</option>
+                  </select>
+                </div>
+      
+                <div class="radio-text">
+                  <label for="previous-owners"><h2>Previous Owners:</h2></label>
+                  <select name="previous-owners">
+                    <option value="" {% if previous_owners is none %} selected {% endif %}>--Select--</option>
+                    <option value="1" {% if previous_owners == "1" %} selected {% endif %}>1</option>
+                    <option value="2" {% if previous_owners == "2" %} selected {% endif %}>2</option>
+                    <option value="3" {% if previous_owners == "3" %} selected {% endif %}>3</option>
+                    <option value="more" {% if previous_owners == "more" %} selected {% endif %}>More</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div id="range-div">
+              <div class="poison-ngife">
+                <div class="text-input">
+                  <h1>Mileage (km):</h1>
+                  <input type="number" name="mileage" id="mileage" min="0" max="1000000" step="1000" onkeypress="return isNumeric(event)">
+                </div>
           
-          <div>
-            <h1>Fuel Type</h1>
-            <select name="fuel-type">
-              <option value="" {% if not fuel_type %} selected {% endif %}>Any</option>
-              <option value="Petrol" {% if fuel_type == "Petrol" %} selected {% endif %}>Petrol</option>
-              <option value="Diesel" {% if fuel_type == "Diesel" %} selected {% endif %}>Diesel</option>
-            </select>
-          </div>
+                <div class="text-input">
+                  <h1>Year:</h1>
+                  <input type="datetime" name="year" id="year" min="2005" max="2023" step="1" onkeypress="return isNumeric(event)">
+                </div>
+              </div>
+            </div>
+            <div id="button-div">
+              <div class="bhathanz">
+                <button type="submit" id="predict">Predict Price</button>
+                <button type="reset" id="reset">Clear</button>
+              </div>
+            </div>
+          </div> 
 
-          <div>
-            <select name="car_brand">
-              <option value="">Select a car</option>
-              <option value="1.1">Toyota</option>
-              <option value="1.2">Isuzu</option>
-              <option value="0.92">Honda</option>
-              <option value="0.95">Hyundai</option>
-              <option value="0.95">Mazda</option>
-              <option value="1.66">BMW</option>
-              <option value="2.0">Audi</option>
-              <option value="1.9">Mercedez-Benz</option>
-              <option value="1.8">Ford</option>
-              <option value="1.4">Datsun</option>
-            </select>
-          </div>
+          <div id="'small-mhofu"></div>
 
-          <div class="radio-text">
-            <label for="previous-owners"><h2>Previous Owners:</h2></label>
-            <select name="previous-owners">
-              <option value="" {% if previous_owners is none %} selected {% endif %}>--Select--</option>
-              <option value="1" {% if previous_owners == "1" %} selected {% endif %}>1</option>
-              <option value="2" {% if previous_owners == "2" %} selected {% endif %}>2</option>
-              <option value="3" {% if previous_owners == "3" %} selected {% endif %}>3</option>
-              <option value="more" {% if previous_owners == "more" %} selected {% endif %}>More</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="poison-ngife">
-          <div class="text-input">
-            <h1>Mileage (km):</h1>
-            <input type="number" name="mileage" id="mileage" min="0" max="1000000" step="1000" onkeypress="return isNumeric(event)">
-          </div>
-    
-          <div class="text-input">
-            <h1>Year:</h1>
-            <input type="datetime" name="year" id="year" min="2005" max="2023" step="1" onkeypress="return isNumeric(event)">
-          </div>
-        </div>
+          <input type="range" min="0" max="100" step="1" id="minPrice">
+          <input type="range" min="0" max="100" step="1" id="maxPrice">
 
-        <div class="poison-ngife">
-          <div class="bhathanz">
-            <button type="submit">Predict Price</button>
-            <div>
-              <input type="reset"/>
+          <div class="poison-ngife">
+            <div class="price-output">
+              <h1 name="price">Price: {{ price }}</h1>
             </div>
           </div>
-        </div>
-
-        <input type="range" min="0" max="100" step="1" id="minPrice">
-        <input type="range" min="0" max="100" step="1" id="maxPrice">
-
-        <div class="poison-ngife">
-          <div class="price-output">
-            <h1 name="price">Price: {{ price }}</h1>
-          </div>
-        </div>
-      </form>  
+        </form>  
       </div>
     </div>
+  </div>
+
+
 
 
   <script src="{{ url_for('static', filename='script.js') }}"></script>
