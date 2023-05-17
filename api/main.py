@@ -2,23 +2,27 @@ import numpy as np
 from model import predict_price
 from flask import Flask, request, jsonify, render_template, json
 
-
 app = Flask(__name__)
 
-# transmission
-# fuel_type
-# previous_owners
-# year
-# car_price
-
+car_brand_mapping = {
+    'Toyota': 1.1,
+    'Isuzu': 1.2,
+    'Honda': 0.92,
+    'Hyundai': 0.95,
+    'Mazda': 0.95,
+    'BMW': 1.66,
+    'Audi': 2.0,
+    'Mercedez-Benz': 1.9,
+    'Ford': 1.8,
+    'Datsun': 1.4,    
+}
 
 @app.route('/', methods=['GET'])
 def home():
         return render_template("index.html",)
 
 @app.route('/predict',methods=['POST'])
-def predict():
-        
+def predict():    
     user_input = {
         "transmission": request.form.get('transmission'),
         "fuel_type": request.form.get('fuel-type'),
@@ -30,10 +34,6 @@ def predict():
    
     car_price = predict_price(user_input['transmission'], user_input['fuel_type'], user_input['previous_owners'], user_input['year'], user_input['mileage'])
     
-    print(car_price)
-    print(user_input)
-    
-
     return render_template("index.html", 
                             transmission=user_input['transmission'],
                             fuel_type=user_input['fuel_type'],
